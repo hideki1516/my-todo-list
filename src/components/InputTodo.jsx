@@ -1,3 +1,4 @@
+import { Button, Flex, Heading, Input } from "@chakra-ui/react";
 import React from "react";
 
 export const InputTodo = (props) => {
@@ -5,15 +6,21 @@ export const InputTodo = (props) => {
 
   return (
     <div>
-      <h1>Add Todo</h1>
+      <Heading as="h2" fontSize={{ base: "md", md: "lg" }}>
+        Add Todo
+      </Heading>
       <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="TODOを入力"
-          value={value}
-          onChange={onChange}
-        />
-        <button type="submit">追加</button>
+        <Flex>
+          <Input
+            type="text"
+            placeholder="TODOを入力"
+            value={value}
+            onChange={onChange}
+            size="md"
+            w="40%"
+          />
+          <Button type="submit">追加</Button>
+        </Flex>
       </form>
     </div>
   );
