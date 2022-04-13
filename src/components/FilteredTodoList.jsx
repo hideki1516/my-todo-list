@@ -1,4 +1,12 @@
-import { Button } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  Select,
+  Spacer,
+  Stack,
+} from "@chakra-ui/react";
 import React from "react";
 
 export const FilteredTodoList = (props) => {
@@ -7,22 +15,38 @@ export const FilteredTodoList = (props) => {
 
   return (
     <ul>
-      {filteredTodoList.map((todo, index) => (
-        <li key={todo.id}>
-          <span>{todo.id}：</span>
-          <span>{todo.title}</span>
-          <select
-            value={todo.status}
-            onChange={(e) => handleStatusChange(todo, e)}
+      <Stack>
+        {filteredTodoList.map((todo, index) => (
+          <HStack
+            spacing={1}
+            key={todo.id}
+            w="full"
+            h="50px"
+            border="1px"
+            borderColor="gray.200"
+            p="2"
           >
-            <option value="notStarted">未着手</option>
-            <option value="inProgress">作業中</option>
-            <option value="done">完了</option>
-          </select>
-          <Button onClick={() => onClickEdit(todo)}>編集</Button>
-          <Button onClick={() => onClickDelete(index)}>削除</Button>
-        </li>
-      ))}
+            <span>{todo.id}：</span>
+            <span>{todo.title}</span>
+            <Spacer />
+            <Select
+              w="20%"
+              value={todo.status}
+              onChange={(e) => handleStatusChange(todo, e)}
+            >
+              <option value="notStarted">未着手</option>
+              <option value="inProgress">作業中</option>
+              <option value="done">完了</option>
+            </Select>
+            <Button onClick={() => onClickEdit(todo)} bgColor="gray.300">
+              編集
+            </Button>
+            <Button onClick={() => onClickDelete(index)} bgColor="gray.300">
+              削除
+            </Button>
+          </HStack>
+        ))}
+      </Stack>
     </ul>
   );
 };

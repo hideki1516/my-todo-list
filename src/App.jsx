@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Box, ChakraProvider } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ChakraProvider,
+  Flex,
+  Heading,
+  HStack,
+  Spacer,
+} from "@chakra-ui/react";
 
 import { InputTodo } from "./components/InputTodo";
 import { EditTodo } from "./components/EditTodo";
@@ -161,24 +169,41 @@ export const App = () => {
       <Box p={"1rem"}>
         <Header />
         <Box p={5} bg="white" minH="calc(100vh - 90px)">
-          {isEditing ? (
-            <EditTodo
-              value={currentTodo.title}
-              onSubmit={handleEditFormSubmit}
-              onChange={handleEditInputChange}
-              onClick={handleEditCancel}
-            />
-          ) : (
-            <InputTodo
-              value={todoTitle}
-              onSubmit={handleAddFormSubmit}
-              onChange={handleAddTodoTitle}
-            />
-          )}
+          <Box mb={2} w="40%">
+            {isEditing ? (
+              <Heading as="h2" fontSize="x-large">
+                Edit Todo
+              </Heading>
+            ) : (
+              <Heading as="h2" fontSize="x-large">
+                Add Todo
+              </Heading>
+            )}
+          </Box>
 
-          <FilterStatus value={filter} onChange={handleFilterChange} />
-
-          <button onClick={() => handleSort("id")}>ID</button>
+          <HStack p={5} mb={5} bg="gray.100">
+            {isEditing ? (
+              <EditTodo
+                value={currentTodo.title}
+                onSubmit={handleEditFormSubmit}
+                onChange={handleEditInputChange}
+                onClick={handleEditCancel}
+              />
+            ) : (
+              <InputTodo
+                value={todoTitle}
+                onSubmit={handleAddFormSubmit}
+                onChange={handleAddTodoTitle}
+              />
+            )}
+            <Spacer />
+            <Flex>
+              <FilterStatus value={filter} onChange={handleFilterChange} />
+              <Button onClick={() => handleSort("id")} bgColor="gray.300">
+                ID
+              </Button>
+            </Flex>
+          </HStack>
 
           <FilteredTodoList
             filteredTodoList={filteredTodoList}
